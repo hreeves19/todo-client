@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { TodoService } from './todos/todo.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ScrollingModule
   ],
   providers: [TodoService],
   bootstrap: [AppComponent]

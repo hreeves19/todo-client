@@ -2,16 +2,15 @@
   Hello world!
 </h1>
 
-<ng-container *ngIf="this.store.todos$ | async as todos">
-  <div *ngFor="let todo of todos" class="shadow-md w-72 h-72 flex flex-col m-auto gap-4 p-4 rounded-md">
-    <h1 class="text-3xl">{{ todo.name }}</h1>
-  </div>
-</ng-container>
 <h1>Only has boy in it lol</h1>
 <ng-container *ngIf="this.store.filteredTodo$ | async as filteredTodo">
-  <div *ngFor="let todo of filteredTodo" class="shadow-md w-72 h-72 flex flex-col m-auto gap-4 p-4 rounded-md">
-    <h1 class="text-3xl">{{ todo.name }}</h1>
-  </div>
+  Displayed: {{ filteredTodo.length }}
+
+  <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="grid grid-cols-4 h-[500px]">
+    <div *cdkVirtualFor="let todo of filteredTodo" class="shadow-md w-72 h-72 flex flex-col m-auto gap-4 p-4 rounded-md">
+      <h1 class="text-3xl">{{ todo.name }}</h1>
+    </div>
+  </cdk-virtual-scroll-viewport>
 </ng-container>
 
 

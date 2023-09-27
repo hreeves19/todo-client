@@ -16,7 +16,7 @@ export class AppStore extends ComponentStore<AppComponentState> {
     }
 
     readonly todos$ = this.select((state) => state.todos)
-    readonly filteredTodo$ = this.select(this.todos$, (todos) => todos.filter((todo) => todo.name.toLowerCase().includes('boy')))
+    readonly filteredTodo$ = this.select(this.todos$, (todos) => todos.filter((todo) => todo.name.toLowerCase().includes('0')))
 
     private readonly setTodos = this.updater((state, todos: Todo[]) => {
         return {
@@ -31,12 +31,18 @@ export class AppStore extends ComponentStore<AppComponentState> {
             todos: [...state.todos, todo]
         }
     })
-    
+
     readonly initialize = this.effect((trigger$: Observable<void>) => {
         return trigger$.pipe(
             switchMap(() => {
                 return this.todoService.getAll().pipe(tapResponse(
-                    (todos) => {
+                    (_) => {
+                        const todos = [...Array(100_000).keys()].map((val) => {
+                            const newTodo = new Todo()
+                            newTodo._id = `${val}`
+                            newTodo.name = `Todo ${val}`
+                            return newTodo
+                        })
                         this.setTodos(todos)
                     },
                     (error) => {
