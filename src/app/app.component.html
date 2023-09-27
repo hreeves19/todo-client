@@ -1,3 +1,28 @@
 <h1 class="text-3xl font-bold underline">
   Hello world!
 </h1>
+
+<ng-container *ngIf="this.store.todos$ | async as todos">
+  <div *ngFor="let todo of todos" class="shadow-md w-72 h-72 flex flex-col m-auto gap-4 p-4 rounded-md">
+    <h1 class="text-3xl">{{ todo.name }}</h1>
+  </div>
+</ng-container>
+<h1>Only has boy in it lol</h1>
+<ng-container *ngIf="this.store.filteredTodo$ | async as filteredTodo">
+  <div *ngFor="let todo of filteredTodo" class="shadow-md w-72 h-72 flex flex-col m-auto gap-4 p-4 rounded-md">
+    <h1 class="text-3xl">{{ todo.name }}</h1>
+  </div>
+</ng-container>
+
+
+<div class="rounded-md">
+  <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+    Button
+  </button>
+</div>
+
+<label for="new-todo">New Todo</label>
+<input type="text" id="new-todo" [(ngModel)]="newTodo" />
+<button (click)="store.addTodo(newTodo)" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+  Button
+</button>
